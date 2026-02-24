@@ -7,7 +7,7 @@ import Loader from "../components/Loader";
 import { apiFetch } from "../lib/utils";
 
 export default function AdminDashboard({ onLogout }) {
-    const [bookings, setBookings] = useState([]); // always array
+    const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState("all");
     const [toast, setToast] = useState(null);
@@ -25,7 +25,6 @@ export default function AdminDashboard({ onLogout }) {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
-            // Ensure data is an array
             setBookings(Array.isArray(data) ? data : data.bookings || []);
         } catch (err) {
             console.error(err);
@@ -43,10 +42,15 @@ export default function AdminDashboard({ onLogout }) {
     const handleUpdate = async (id, status) => {
         try {
             const token = localStorage.getItem("adminToken");
-            await apiFetch(`/bookings/${id}/status`, {
+
+            // FIX: Make sure we're sending proper JSON
+            const response = await apiFetch(`/bookings/${id}/status`, {
                 method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
                 body: JSON.stringify({ status }),
-                headers: { Authorization: `Bearer ${token}` },
             });
 
             setBookings((prev) =>
@@ -59,7 +63,6 @@ export default function AdminDashboard({ onLogout }) {
         }
     };
 
-    // Always safe: bookings is array
     const safeBookings = Array.isArray(bookings) ? bookings : [];
 
     const counts = {

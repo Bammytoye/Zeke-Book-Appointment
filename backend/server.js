@@ -1,12 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
 import cors from "cors";
 import connectDB from "./config/db.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
-dotenv.config();
 connectDB();
 
 const app = express();
