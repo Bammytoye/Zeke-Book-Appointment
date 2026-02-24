@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import Sidebar from "../components/Sidebar";
+import Topbar from "../components/Topbar";
 import StatCards from "../components/StatCards";
 import BookingTable from "../components/BookingTable";
 import Toast from "../components/Toast";
 import Loader from "../components/Loader";
+import Footer from "../components/Footer";
 import { apiFetch } from "../lib/utils";
 
 export default function AdminDashboard({ onLogout }) {
@@ -43,7 +44,6 @@ export default function AdminDashboard({ onLogout }) {
         try {
             const token = localStorage.getItem("adminToken");
 
-            // FIX: Make sure we're sending proper JSON
             const response = await apiFetch(`/bookings/${id}/status`, {
                 method: "PATCH",
                 headers: {
@@ -73,15 +73,15 @@ export default function AdminDashboard({ onLogout }) {
     };
 
     return (
-        <div className="min-h-screen bg-[#020617] flex">
-            <Sidebar
+        <div className="min-h-screen bg-gradient-to-br from-[#020617] via-slate-900 to-[#020617] flex flex-col">
+            <Topbar
                 filter={filter}
                 onFilter={setFilter}
                 counts={counts}
                 onLogout={onLogout}
             />
-            <main className="flex-1 p-8 ml-60">
-                <h1 className="text-2xl text-slate-100 font-bold mb-4">Dashboard</h1>
+
+            <main className="flex-1 px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 max-w-[1920px] mx-auto w-full">
                 <StatCards bookings={safeBookings} />
                 {loading ? (
                     <Loader />
@@ -97,6 +97,8 @@ export default function AdminDashboard({ onLogout }) {
                     />
                 )}
             </main>
+
+            <Footer />
             <Toast toast={toast} />
         </div>
     );
