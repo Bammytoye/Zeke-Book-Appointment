@@ -8,25 +8,30 @@ export default function Topbar({ filter, onFilter, counts, onLogout }) {
 
     return (
         <div className="sticky top-0 z-50 bg-gradient-to-r from-[#020617]/95 via-slate-900/95 to-[#020617]/95 backdrop-blur-xl border-b border-slate-800/50 shadow-lg shadow-black/20">
-            {/* Top Section - Logo & Live Status */}
+            {/* Top Section - Logo */}
             <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-4 border-b border-slate-800/30">
                 <div className="flex items-center gap-3 sm:gap-4">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                        <span className="text-lg sm:text-xl lg:text-2xl">🎫</span>
-                    </div>
-                    <div>
-                        <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-100 tracking-tight bg-gradient-to-r from-slate-100 to-slate-300 bg-clip-text text-transparent">
-                            Admin Dashboard
-                        </h1>
-                        <p className="text-slate-400 text-[10px] sm:text-xs lg:text-sm mt-0.5 font-medium">
-                            {new Date().toLocaleDateString("en-US", {
-                                weekday: "long",
-                                month: "long",
-                                day: "numeric",
-                                year: "numeric",
-                            })}
-                        </p>
-                    </div>
+                    <button
+                        className="flex items-center gap-2 sm:gap-3 group cursor-pointer"
+                    >
+                        <div className="w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-600 flex items-center justify-center font-black text-base sm:text-lg lg:text-xl shadow-lg shadow-violet-500/25 transition-all group-hover:scale-105 group-hover:shadow-violet-500/40">
+                            S
+                        </div>
+                        <div>
+                            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-100 tracking-tight bg-gradient-to-r from-slate-100 to-slate-300 bg-clip-text text-transparent">
+                                Admin Dashboard
+                            </h1>
+                            <p className="text-slate-400 text-[10px] sm:text-xs lg:text-sm mt-0.5 font-medium">
+                                {new Date().toLocaleDateString("en-US", {
+                                    weekday: "long",
+                                    month: "long",
+                                    day: "numeric",
+                                    year: "numeric",
+                                })}
+                            </p>
+                        </div>
+
+                    </button>
                 </div>
 
                 <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
@@ -57,19 +62,17 @@ export default function Topbar({ filter, onFilter, counts, onLogout }) {
                         <button
                             key={n.key}
                             onClick={() => onFilter(n.key)}
-                            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 rounded-xl transition-all whitespace-nowrap text-xs sm:text-sm lg:text-base font-medium ${
-                                filter === n.key
-                                    ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/30"
-                                    : "bg-slate-800/40 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-slate-700/30"
-                            }`}
+                            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 rounded-xl transition-all whitespace-nowrap text-xs sm:text-sm lg:text-base font-medium ${filter === n.key
+                                ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/30"
+                                : "bg-slate-800/40 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-slate-700/30"
+                                }`}
                         >
                             <span className="text-base sm:text-lg">{n.icon}</span>
                             <span className="font-semibold">{n.label}</span>
-                            <span className={`px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold ${
-                                filter === n.key
-                                    ? "bg-white/20"
-                                    : "bg-slate-700/50"
-                            }`}>
+                            <span className={`px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold ${filter === n.key
+                                ? "bg-white/20"
+                                : "bg-slate-700/50"
+                                }`}>
                                 {n.count}
                             </span>
                         </button>
