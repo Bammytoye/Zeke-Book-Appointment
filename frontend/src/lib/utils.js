@@ -13,6 +13,11 @@ export const TIME_SLOTS = [
     "15:00", "15:30", "16:00", "16:30", "17:00",
 ];
 
+export const fetchConfig = async () => {
+    const data = await apiFetch("/bookings/config");
+    return data;
+};
+
 export const fmtDate = (d) =>
     new Date(d + "T00:00:00").toLocaleDateString("en-US", {
         weekday: "long", month: "long", day: "numeric", year: "numeric",

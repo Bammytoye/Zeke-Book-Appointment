@@ -1,17 +1,10 @@
-import { useState } from "react";
-import { fmtDate, fmtTime, svcLabel } from "../lib/utils";
+import { fmtDate, fmtTime, svcLabel, isMobile } from "../lib/utils";
 import Avatar from "./Avatar";
 import StatusBadge from "./StatusBadge";
 
-export default function DetailModal({ booking, onClose, onUpdate, filter }) {
-    const [busy, setBusy] = useState(null);
-
-    const act = async (status) => {
-        setBusy(status);
-        await onUpdate(booking._id, status);
-        setBusy(null);
-        onClose();
-    };
+export default function DetailModal({ booking, onClose, onApprove, onCancel, filter }) {
+    // Use shorter date format on mobile
+    const dateFormat = isMobile() ? "short" : "full";
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 lg:p-6"
@@ -41,14 +34,14 @@ export default function DetailModal({ booking, onClose, onUpdate, filter }) {
                     </div>
                 </div>
 
-                <div className="px-4 sm:px-6 lg:px-7 py-4 sm:py-5 space-y-2 sm:space-y-3 max-h-[50vh] sm:max-h-none overflow-y-auto">
+                <div className="px-4 sm:px-6 lg:px-7 py-4 sm:py-5 space-y-2 sm:space-y-3 max-h-[50vh] sm:max-h-[60vh] overflow-y-auto">
                     {[
                         ["Service", svcLabel(booking.service)],
-                        ["Date", fmtDate(booking.date)],
+                        ["Date", fmtDate(booking.date, dateFormat)],
                         ["Time", fmtTime(booking.time)],
                         ["Phone", booking.phone || "—"],
                         ["Notes", booking.notes || "—"],
-                        ["Booked on", fmtDate(booking.createdAt)],
+                        ["Booked", fmtDate(booking.createdAt, dateFormat)],
                     ].map(([k, v]) => (
                         <div key={k} className="flex flex-col sm:flex-row sm:justify-between sm:items-start py-2 sm:py-2.5 border-b border-slate-800/60 last:border-0 gap-1 sm:gap-4">
                             <span className="text-xs font-bold text-slate-600 uppercase tracking-widest shrink-0">{k}</span>
@@ -60,19 +53,17 @@ export default function DetailModal({ booking, onClose, onUpdate, filter }) {
                 {filter === "all" && (
                     <div className="px-4 sm:px-6 lg:px-7 pb-4 sm:pb-6 lg:pb-7 flex flex-col sm:flex-row gap-2 sm:gap-3">
                         {booking.status !== "approved" && (
-                            <button onClick={() => act("approved")} disabled={!!busy}
+                            <button onClick={onApprove}
                                 className="flex-1 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs sm:text-sm font-bold
-                    hover:bg-emerald-500/20 transition-all disabled:opacity-40 flex items-center justify-center gap-2">
-                                {busy === "approved" ? <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 border-2 border-emerald-400/30 border-t-emerald-400 rounded-full animate-spin" /> : "✓"}
-                                Approve
+                    hover:bg-emerald-500/20 transition-all flex items-center justify-center gap-2">
+                                ✓ Approve
                             </button>
                         )}
                         {booking.status !== "cancelled" && (
-                            <button onClick={() => act("cancelled")} disabled={!!busy}
+                            <button onClick={onCancel}
                                 className="flex-1 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-red-500/10 text-red-400 border border-red-500/20 text-xs sm:text-sm font-bold
-                    hover:bg-red-500/20 transition-all disabled:opacity-40 flex items-center justify-center gap-2">
-                                {busy === "cancelled" ? <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 border-2 border-red-400/30 border-t-red-400 rounded-full animate-spin" /> : "✕"}
-                                Cancel
+                    hover:bg-red-500/20 transition-all flex items-center justify-center gap-2">
+                                ✕ Cancel
                             </button>
                         )}
                     </div>

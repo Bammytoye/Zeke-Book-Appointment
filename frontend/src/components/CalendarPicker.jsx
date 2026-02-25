@@ -46,8 +46,8 @@ export default function CalendarPicker({ selectedDate, onSelect }) {
             </div>
 
             <div className="grid grid-cols-7 gap-1">
-                {cells.map((d, i) => {
-                    if (!d) return <div key={`empty-${i}`} />;
+                {cells.map((d, index) => {
+                    if (!d) return <div key={`empty-${index}`} />;
                     const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
                     const isPast = dateStr < today;
                     const isWknd = [0, 6].includes(new Date(dateStr).getDay());

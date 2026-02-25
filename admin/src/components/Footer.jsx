@@ -1,4 +1,3 @@
-// Footer.jsx
 export default function Footer() {
     return (
         <footer className="border-t border-slate-800/50 bg-gradient-to-r from-[#020617]/95 via-slate-900/95 to-[#020617]/95 backdrop-blur-xl">

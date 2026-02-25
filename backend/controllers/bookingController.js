@@ -15,7 +15,6 @@ export const createBooking = async (req, res, next) => {
 
         const booking = await Booking.create({ name, email, phone, notes, service, date, time });
 
-        // Fire-and-forget emails
         sendUserConfirmation(booking).catch(console.error);
         sendAdminNotification(booking).catch(console.error);
 
