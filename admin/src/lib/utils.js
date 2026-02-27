@@ -1,5 +1,7 @@
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
 export async function apiFetch(url, options = {}) {
-    const res = await fetch(`http://localhost:5000/api${url}`, {
+    const res = await fetch(`${API_URL}${url}`, {
         headers: {
             "Content-Type": "application/json",
             ...(options.headers || {}),
@@ -13,7 +15,6 @@ export async function apiFetch(url, options = {}) {
     }
     return res.json();
 }
-
 export const STATUS_CFG = {
     pending: {
         label: "Pending",
@@ -35,7 +36,7 @@ export const STATUS_CFG = {
 // Responsive date formatting
 export const fmtDate = (d, format = "full") => {
     const date = new Date(d);
-    
+
     if (format === "short") {
         // Mobile-friendly"
         return date.toLocaleDateString("en-US", {
@@ -44,7 +45,7 @@ export const fmtDate = (d, format = "full") => {
             year: "numeric"
         });
     }
-    
+
     if (format === "medium") {
         // Tablet-friendly"
         return date.toLocaleDateString("en-US", {
@@ -54,7 +55,7 @@ export const fmtDate = (d, format = "full") => {
             year: "numeric"
         });
     }
-    
+
     // Desktop"
     return date.toLocaleDateString("en-US", {
         weekday: "long",
