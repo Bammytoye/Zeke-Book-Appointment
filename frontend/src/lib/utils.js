@@ -1,4 +1,4 @@
-export const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+export const API_BASE = import.meta.env.VITE_API_URL || "https://zeke-book-appointment-backend.onrender.com/api";
 
 export const SERVICES = [
     { id: "consultation", label: "Consultation", duration: "30 min", icon: "💬", desc: "Quick Q&A and expert advice" },
