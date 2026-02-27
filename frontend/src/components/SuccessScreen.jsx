@@ -92,7 +92,7 @@ export default function SuccessScreen({ booking, onReset }) {
                 </div>
 
                 {/* Footer Note */}
-                <p className="text-center text-white/40 text-xs sm:text-sm mt-6">
+                <p className="text-center text-white/40 text-xs sm:text-sm mt-3">
                     Need to make changes? Contact us at support@smartbooking.com
                 </p>
             </div>

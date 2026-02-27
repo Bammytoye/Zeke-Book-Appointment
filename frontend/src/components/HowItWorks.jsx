@@ -20,15 +20,15 @@ export default function HowItWorks() {
 
                 {/* Steps Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-6 lg:gap-10">
-                    {steps.map((item, idx) => (
-                        <div key={idx} className="relative">
+                    {steps.map((item, index) => (
+                        <div key={index} className="relative">
                             {/* Connecting Line - Desktop only */}
-                            {idx < 2 && (
+                            {index < 2 && (
                                 <div className="hidden md:block absolute top-16 lg:top-20 -right-3 lg:-right-5 w-6 lg:w-10 h-0.5 bg-gradient-to-r from-violet-500/50 to-transparent z-10" />
                             )}
 
                             {/* Mobile Step Connector */}
-                            {idx < 2 && (
+                            {index < 2 && (
                                 <div className="md:hidden absolute left-1/2 -bottom-3 w-0.5 h-6 bg-gradient-to-b from-violet-500/50 to-transparent transform -translate-x-1/2" />
                             )}
 
@@ -62,9 +62,9 @@ export default function HowItWorks() {
                                     {steps.map((step, i) => (
                                         <div
                                             key={i}
-                                            className={`h-1 rounded-full transition-all duration-300 ${i === idx
+                                            className={`h-1 rounded-full transition-all duration-300 ${i === index
                                                     ? "w-8 bg-gradient-to-r from-violet-500 to-fuchsia-500"
-                                                    : i < idx
+                                                    : i < index
                                                         ? "w-4 bg-violet-500/30"
                                                         : "w-4 bg-white/10"
                                                 }`}

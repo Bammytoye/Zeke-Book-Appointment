@@ -42,22 +42,22 @@ export default function CalendarPicker({ selectedDate, onSelect }) {
             </div>
 
             <div className="grid grid-cols-7 mb-2">
-                {DAYS.map(d => <p key={d} className="text-center text-xs font-bold text-white/25 py-1">{d}</p>)}
+                {DAYS.map(day => <p key={day} className="text-center text-xs font-bold text-white/25 py-1">{day}</p>)}
             </div>
 
             <div className="grid grid-cols-7 gap-1">
-                {cells.map((d, index) => {
-                    if (!d) return <div key={`empty-${index}`} />;
-                    const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+                {cells.map((day, index) => {
+                    if (!day) return <div key={`empty-${index}`} />;
+                    const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
                     const isPast = dateStr < today;
-                    const isWknd = [0, 6].includes(new Date(dateStr).getDay());
-                    const disabled = isPast || isWknd;
+                    const isWeekend = [0, 6].includes(new Date(dateStr).getDay());
+                    const disabled = isPast || isWeekend;
                     const isToday = dateStr === today;
                     const isSel = dateStr === selectedDate;
 
                     return (
                         <button
-                            key={d}
+                            key={day}
                             disabled={disabled}
                             onClick={() => onSelect(dateStr)}
                             className={`h-9 rounded-xl text-sm font-semibold transition-all duration-150
@@ -66,7 +66,7 @@ export default function CalendarPicker({ selectedDate, onSelect }) {
                                         : isToday ? "text-violet-300 font-bold ring-1 ring-violet-500/40 hover:bg-violet-500/20"
                                             : "text-white/70 hover:bg-white/10 hover:text-white"}`}
                         >
-                            {d}
+                            {day}
                         </button>
                     );
                 })}

@@ -9,21 +9,21 @@ export default function DetailsStep({
     return (
         <div className="animate-[fadeUp_0.4s_ease_forwards]">
             <h2 className="text-2xl font-bold text-white mb-1">Your details</h2>
-            <p className="text-white/40 text-sm mb-6">Almost done — just fill this in.</p>
+            <p className="text-white/40 text-sm mb-2">Almost done....just fill this in.</p>
 
             <BookingSummaryCard service={service} date={date} time={time} />
 
             <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-2">
                     <Field label="Full Name" required>
-                        <Input type="text" placeholder="Jane Doe" value={name} onChange={e => setName(e.target.value)} />
+                        <Input type="text" placeholder="First & Last Name" value={name} onChange={e => setName(e.target.value)} />
                     </Field>
                     <Field label="Phone">
-                        <Input type="tel" placeholder="+1 555 000 0000" value={phone} onChange={e => setPhone(e.target.value)} />
+                        <Input type="tel" placeholder="0000000000000" value={phone} onChange={e => setPhone(e.target.value)} />
                     </Field>
                 </div>
                 <Field label="Email" required>
-                    <Input type="email" placeholder="jane@example.com" value={email} onChange={e => setEmail(e.target.value)} />
+                    <Input type="email" placeholder="example@gmail.com" value={email} onChange={e => setEmail(e.target.value)} />
                 </Field>
                 <Field label="Notes">
                     <textarea
@@ -36,9 +36,9 @@ export default function DetailsStep({
                 </Field>
             </div>
 
-            {error && <div className="flex items-center gap-2.5 mt-4 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 text-red-400 text-sm font-medium">⚠ {error}</div>}
+            {error && <div className="flex justify-center items-center gap-2.5 mt-1 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 text-red-400 text-sm font-medium">⚠ {error}</div>}
 
-            <div className="flex gap-3 mt-6">
+            <div className="flex gap-3 mt-3">
                 <button onClick={back} className="px-6 py-4 rounded-2xl border border-white/15 text-white/50 text-sm font-bold hover:border-white/30 hover:text-white transition-all">
                     ← Back
                 </button>
