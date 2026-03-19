@@ -8,6 +8,28 @@ export default function AdminLogin({ onSuccess }) {
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
+    const handleDemoLogin = async () => {
+        setError("");
+        setLoading(true);
+
+        try {
+            const data = await apiFetch("/auth/login", {
+                method: "POST",
+                body: JSON.stringify({
+                    email: "demo@school.com",
+                    password: "demo123",
+                }),
+            });
+
+            localStorage.setItem("adminToken", data.token);
+            onSuccess();
+        } catch (err) {
+            setError(err.message || "Demo login failed.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const login = async () => {
         if (!user || !pass) {
             setError("Enter username and password.");
@@ -120,6 +142,14 @@ export default function AdminLogin({ onSuccess }) {
                             ) : (
                                 "Sign In"
                             )}
+                        </button>
+
+                        <button
+                            onClick={handleDemoLogin}
+                            disabled={loading}
+                            className="w-full mt-3 py-3 sm:py-3.5 lg:py-4 rounded-xl border border-indigo-500/40 text-indigo-400 font-semibold hover:bg-indigo-500/10 disabled:opacity-50 transition-all text-sm sm:text-base"
+                        >
+                            🚀 Login as Demo Admin
                         </button>
                     </div>
                 </div>
