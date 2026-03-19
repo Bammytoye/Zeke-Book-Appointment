@@ -150,7 +150,7 @@ export default function AdminLogin({ onSuccess }) {
                         <button
                             type="button"
                             onClick={handleDemoLogin}
-                            className="btn-primary w-full mt-3 bg-gray-600 hover:bg-gray-700 flex items-center justify-center gap-2"
+                            className="w-full mt-3 py-3 sm:py-3.5 lg:py-4 rounded-xl border border-indigo-500/40 text-indigo-400 font-semibold hover:bg-indigo-500/10 disabled:opacity-50 transition-all text-sm sm:text-base"
                         >
                             🚀 Demo Login
                         </button>
